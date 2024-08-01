@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComapaniesHouseGateway", "ComapaniesHouseGateway\ComapaniesHouseGateway.csproj", "{C48E955E-2775-4AF7-A066-E56562745CE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompaniesHouseGateway", "CompaniesHouseGateway\CompaniesHouseGateway.csproj", "{C48E955E-2775-4AF7-A066-E56562745CE1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{843BFF98-0AB5-4E0A-9666-9B812D8CC958}"
 	ProjectSection(SolutionItems) = preProject

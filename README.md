@@ -17,5 +17,5 @@ Create a REST API application and copy the token then paste it into your config.
 Call the API with the following GET url, with the last part being a companies house number:
 
 ```
-https://localhost:32769/CompaniesHouse/companies/06499687
+https://localhost:7131/CompaniesHouse/companies/06499687
 ```

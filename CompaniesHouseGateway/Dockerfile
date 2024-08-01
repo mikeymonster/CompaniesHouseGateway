@@ -9,17 +9,17 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ComapaniesHouseGateway/ComapaniesHouseGateway.csproj", "ComapaniesHouseGateway/"]
-RUN dotnet restore "./ComapaniesHouseGateway/ComapaniesHouseGateway.csproj"
+COPY ["CompaniesHouseGateway/CompaniesHouseGateway.csproj", "CompaniesHouseGateway/"]
+RUN dotnet restore "./CompaniesHouseGateway/CompaniesHouseGateway.csproj"
 COPY . .
-WORKDIR "/src/ComapaniesHouseGateway"
-RUN dotnet build "./ComapaniesHouseGateway.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/CompaniesHouseGateway"
+RUN dotnet build "./CompaniesHouseGateway.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ComapaniesHouseGateway.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./CompaniesHouseGateway.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ComapaniesHouseGateway.dll"]
+ENTRYPOINT ["dotnet", "CompaniesHouseGateway.dll"]
