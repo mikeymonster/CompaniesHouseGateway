@@ -1,0 +1,6 @@
+@ComapaniesHouseGateway_HostAddress = http://localhost:5160
+
+GET {{ComapaniesHouseGateway_HostAddress}}/CompaniesHouse/companies/06499687
+Accept: application/json
+
+###
