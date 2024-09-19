@@ -44,7 +44,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/CompaniesHouse/companies/{companiesHouseNumber}",
+app.MapGet("/company/{companiesHouseNumber}",
     async (string companiesHouseNumber, IHttpClientFactory httpClientFactory) =>
 {
     var client = httpClientFactory.CreateClient(CompaniesHouseClient);
