@@ -1,7 +1,10 @@
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 
 const string CompaniesHouseClient = "CompaniesHouse";
+
+var random = new Random();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +50,20 @@ app.UseHttpsRedirection();
 app.MapGet("/company/{companiesHouseNumber}",
     async (string companiesHouseNumber, IHttpClientFactory httpClientFactory) =>
 {
+    // Inject some chaos
+    //var chaos = random.Next(100);
+    //if (chaos % 5 == 0)
+    //{
+    //    var delay = chaos * 250;
+    //    logger.LogInformation("Delaying by {Delay}ms for company {Company}", delay, companiesHouseNumber);
+    //    await Task.Delay(delay);
+    //}
+    //if (chaos % 7 == 0 || chaos % 3 == 0)
+    //{
+    //    logger.LogInformation("Returning 429 for company {Company}", companiesHouseNumber);
+    //    return Results.Text(null, contentType: "application/json", statusCode: (int)HttpStatusCode.TooManyRequests);
+    //}
+
     var client = httpClientFactory.CreateClient(CompaniesHouseClient);
     var response = await client.GetAsync($"company/{companiesHouseNumber}");
 
