@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
@@ -47,22 +48,35 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/company/{companiesHouseNumber}",
-    async (string companiesHouseNumber, IHttpClientFactory httpClientFactory) =>
+app.MapGet("/company/{companiesHouseNumber}", async (string companiesHouseNumber, IHttpClientFactory httpClientFactory) =>
 {
-    // Inject some chaos
-    //var chaos = random.Next(100);
-    //if (chaos % 5 == 0)
-    //{
-    //    var delay = chaos * 250;
-    //    logger.LogInformation("Delaying by {Delay}ms for company {Company}", delay, companiesHouseNumber);
-    //    await Task.Delay(delay);
-    //}
-    //if (chaos % 7 == 0 || chaos % 3 == 0)
-    //{
-    //    logger.LogInformation("Returning 429 for company {Company}", companiesHouseNumber);
-    //    return Results.Text(null, contentType: "application/json", statusCode: (int)HttpStatusCode.TooManyRequests);
-    //}
+    var chooseChaos = false;
+    if (chooseChaos)
+    {
+        var chaos = random.Next(100);
+
+        if (chaos % 9 == 0)
+        {
+            var delay = chaos * 250;
+            logger.LogInformation("Delaying by {Delay}ms for company {Company}", delay, companiesHouseNumber);
+            await Task.Delay(delay);
+        }
+        else if (chaos % 2 == 0)
+        {
+            logger.LogInformation("Returning 429 for company {Company}", companiesHouseNumber);
+            return Results.Text(null, contentType: "application/json", statusCode: (int)HttpStatusCode.TooManyRequests);
+        }
+        else if (chaos % 11 == 0)
+        {
+            logger.LogInformation("Returning 502 for company {Company}", companiesHouseNumber);
+            return Results.Text(null, contentType: "application/json", statusCode: (int)HttpStatusCode.BadGateway);
+        }
+        else if (chaos % 6 == 0)
+        {
+            logger.LogInformation("Returning 504 for company {Company}", companiesHouseNumber);
+            return Results.Text(null, contentType: "application/json", statusCode: (int)HttpStatusCode.GatewayTimeout);
+        }
+    }
 
     var client = httpClientFactory.CreateClient(CompaniesHouseClient);
     var response = await client.GetAsync($"company/{companiesHouseNumber}");
